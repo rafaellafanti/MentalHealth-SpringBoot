@@ -109,7 +109,7 @@ src/main/resources
 ### 1. Clonar o Repositório
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone (https://github.com/rafaellafanti/MentalHealth-SpringBoot)
 ```
 
 ### 2. Abrir no IntelliJ IDEA
