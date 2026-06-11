@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <title>Mental Health</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+<!-- ========== TELA 1 — LOGIN ========== -->
+<div class="tela ativa" id="tela-login">
+    <div class="login-topo">
+        <h1>🧠 Mental Health</h1>
+        <p>Sistema de apoio à saúde mental</p>
+    </div>
+    <div class="card">
+        <div class="campo">
+            <label>E-mail</label>
+            <input type="email" id="login-email" placeholder="seu@email.com" value="admin@mh.com"/>
+        </div>
+        <div class="campo">
+            <label>Senha</label>
+            <input type="password" id="login-senha" placeholder="••••••••" value="123456"/>
+        </div>
+        <button class="btn-primario" onclick="doLogin()">Entrar</button>
+        <button class="btn-secundario" onclick="ir('tela-cadastro')">Criar conta</button>
+    </div>
+</div>
+
+
+<!-- ========== TELA 2 — CADASTRO ========== -->
+<div class="tela" id="tela-cadastro">
+    <div class="cabecalho">
+        <button class="btn-voltar" onclick="ir('tela-login')">← Voltar</button>
+        <h2>Criar conta</h2>
+    </div>
+    <div class="card">
+        <div class="campo">
+            <label>Nome completo</label>
+            <input type="text" placeholder="Maria da Silva"/>
+        </div>
+        <div class="campo">
+            <label>E-mail</label>
+            <input type="email" placeholder="seu@email.com"/>
+        </div>
+        <div class="campo">
+            <label>Senha</label>
+            <input type="password" placeholder="Mínimo 8 caracteres"/>
+        </div>
+        <div class="campo">
+            <label>Tipo de usuário</label>
+            <select>
+                <option value="">Selecione</option>
+                <option value="CIDADAO">Cidadão</option>
+                <option value="ATENDENTE">Atendente</option>
+                <option value="GESTOR">Gestor</option>
+            </select>
+        </div>
+        <button class="btn-primario" onclick="ir('tela-home'); toast('Cadastro realizado! 🎉')">Criar conta</button>
+    </div>
+</div>
+
+
+<!-- ========== TELA 3 — HOME ========== -->
+<div class="tela" id="tela-home">
+    <div class="home-topo">
+        <div>
+            <p class="saudacao">Olá, Maria 👋</p>
+            <p class="sub">Como podemos ajudar hoje?</p>
+        </div>
+        <button class="avatar" onclick="ir('tela-perfil')">M</button>
+    </div>
+
+    <div class="corpo">
+        <p class="secao-titulo">Acesso rápido</p>
+        <div class="grid-2">
+            <button class="card-acao verde" onclick="ir('tela-nova')">
+                <span class="icone-acao">＋</span>
+                Nova Solicitação
+            </button>
+            <button class="card-acao azul" onclick="ir('tela-consultar')">
+                <span class="icone-acao">🔍</span>
+                Consultar Caso
+            </button>
+            <button class="card-acao roxo" onclick="ir('tela-historico')">
+                <span class="icone-acao">🕐</span>
+                Histórico
+            </button>
+            <button class="card-acao laranja" onclick="ir('tela-info')">
+                <span class="icone-acao">ℹ️</span>
+                Informações
+            </button>
+        </div>
+
+        <p class="secao-titulo">Casos recentes</p>
+        <div id="lista-home">
+            <p class="msg-carregando">Carregando...</p>
+        </div>
+    </div>
+
+    <nav class="nav-inferior">
+        <button class="nav-item ativo" onclick="ir('tela-home')">🏠<span>Home</span></button>
+        <button class="nav-item" onclick="ir('tela-nova')">＋<span>Novo</span></button>
+        <button class="nav-item" onclick="ir('tela-dashboard')">📊<span>Dashboard</span></button>
+        <button class="nav-item" onclick="ir('tela-perfil')">👤<span>Perfil</span></button>
+    </nav>
+</div>
+
+
+<!-- ========== TELA 4 — NOVA SOLICITAÇÃO ========== -->
+<div class="tela" id="tela-nova">
+    <div class="cabecalho">
+        <button class="btn-voltar" onclick="ir('tela-home')">← Voltar</button>
+        <h2>Nova Solicitação</h2>
+    </div>
+    <div class="corpo">
+        <div class="card">
+            <div class="campo">
+                <label>Categoria</label>
+                <select id="nova-categoria">
+                    <option value="">Selecione</option>
+                    <option value="DEPRESSAO">Depressão</option>
+                    <option value="ANSIEDADE">Ansiedade</option>
+                    <option value="ASSEDIO">Assédio</option>
+                    <option value="BULLYING">Bullying</option>
+                    <option value="VIOLENCIA_PSICOLOGICA">Violência Psicológica</option>
+                    <option value="PEDIDO_AJUDA">Pedido de Ajuda</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Prioridade</label>
+                <div class="grupo-radio">
+                    <label class="radio-opcao"><input type="radio" name="prioridade" value="BAIXA"/> Baixa</label>
+                    <label class="radio-opcao"><input type="radio" name="prioridade" value="MEDIA" checked/> Média</label>
+                    <label class="radio-opcao"><input type="radio" name="prioridade" value="ALTA"/> Alta</label>
+                    <label class="radio-opcao"><input type="radio" name="prioridade" value="URGENTE"/> Urgente</label>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>Localização</label>
+                <input type="text" id="nova-local" placeholder="Ex: Escola Est. Centro, bairro X"/>
+            </div>
+
+            <div class="campo">
+                <label>Descrição</label>
+                <textarea id="nova-desc" rows="4" placeholder="Descreva a situação..."></textarea>
+            </div>
+
+            <div class="campo linha-toggle">
+                <div>
+                    <strong>Enviar anonimamente</strong>
+                    <small>Seus dados não serão vinculados</small>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" id="anonimo-toggle"/>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <button class="btn-primario" onclick="enviarSolicitacao()">Enviar Solicitação</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ========== TELA 4b — PROTOCOLO GERADO ========== -->
+<div class="tela" id="tela-protocolo">
+    <div class="corpo centro">
+        <div class="sucesso-icone">✓</div>
+        <h2>Solicitação enviada!</h2>
+        <p>Guarde o número do protocolo abaixo.</p>
+
+        <div class="box-protocolo">
+            <small>Número do Protocolo</small>
+            <strong id="numero-protocolo">#1</strong>
+            <button class="btn-copiar" onclick="copiarProtocolo()">📋 Copiar</button>
+        </div>
+
+        <div class="card detalhe-protocolo">
+            <div class="linha-detalhe"><span>Categoria</span><strong id="proto-cat">—</strong></div>
+            <div class="linha-detalhe"><span>Prioridade</span><strong id="proto-prio">—</strong></div>
+            <div class="linha-detalhe"><span>Prazo previsto</span><strong id="proto-prazo">—</strong></div>
+            <div class="linha-detalhe"><span>Status</span><strong>Aberto</strong></div>
+        </div>
+
+        <button class="btn-primario" onclick="ir('tela-home')">Voltar ao início</button>
+        <button class="btn-secundario" onclick="ir('tela-consultar')">Consultar este caso</button>
+    </div>
+</div>
+
+
+<!-- ========== TELA 5 — CONSULTAR CASO ========== -->
+<div class="tela" id="tela-consultar">
+    <div class="cabecalho">
+        <button class="btn-voltar" onclick="ir('tela-home')">← Voltar</button>
+        <h2>Consultar Caso</h2>
+    </div>
+    <div class="corpo">
+        <div class="card">
+            <p class="texto-intro">Informe o número do protocolo para consultar sua solicitação.</p>
+            <div class="campo">
+                <label>Número do Protocolo</label>
+                <input type="number" id="busca-protocolo" placeholder="Ex: 1"/>
+            </div>
+            <button class="btn-primario" onclick="buscarCaso()">🔍 Buscar</button>
+        </div>
+
+        <div class="card" id="card-resultado" style="display:none">
+            <div class="resultado-topo">
+                <div>
+                    <p class="proto-num" id="res-proto">—</p>
+                    <span class="badge" id="res-badge">—</span>
+                </div>
+                <span class="status-pill" id="res-status">—</span>
+            </div>
+            <div class="linhas-info">
+                <div class="linha-detalhe"><span>Prazo</span><strong id="res-prazo">—</strong></div>
+                <div class="linha-detalhe"><span>Prioridade</span><strong id="res-prio">—</strong></div>
+                <div class="linha-detalhe"><span>Localização</span><strong id="res-local">—</strong></div>
+            </div>
+            <p class="descricao-caso" id="res-desc">—</p>
+            <div class="acoes-resultado">
+                <button class="btn-secundario" onclick="ir('tela-historico')">🕐 Ver Histórico</button>
+                <button class="btn-perigo" onclick="toast('Caso finalizado.')">✓ Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ========== TELA 6 — HISTÓRICO ========== -->
+<div class="tela" id="tela-historico">
+    <div class="cabecalho">
+        <button class="btn-voltar" onclick="ir('tela-home')">← Voltar</button>
+        <h2>Histórico</h2>
+    </div>
+    <div class="corpo">
+        <div class="card">
+            <p class="proto-num">#2025-0001</p>
+            <div class="tags">
+                <span class="badge azul">Ansiedade</span>
+                <span class="status-pill em-atendimento">Em atendimento</span>
+            </div>
+        </div>
+
+        <div class="linha-tempo">
+            <div class="evento feito">
+                <div class="circulo">✓</div>
+                <div class="evento-conteudo">
+                    <div class="evento-topo">
+                        <strong>Solicitação Criada</strong>
+                        <small>01/06 · 14:30</small>
+                    </div>
+                    <p>Registrada no sistema. Prioridade: Média.</p>
+                    <span class="responsavel">Sistema</span>
+                </div>
+            </div>
+            <div class="evento feito">
+                <div class="circulo">✓</div>
+                <div class="evento-conteudo">
+                    <div class="evento-topo">
+                        <strong>Em Análise</strong>
+                        <small>03/06 · 09:15</small>
+                    </div>
+                    <p>Caso recebido pela equipe de triagem.</p>
+                    <span class="responsavel">Ana Paula (Atendente)</span>
+                </div>
+            </div>
+            <div class="evento ativo">
+                <div class="circulo pulsar"></div>
+                <div class="evento-conteudo">
+                    <div class="evento-topo">
+                        <strong>Em Atendimento</strong>
+                        <small>07/06 · 10:00</small>
+                    </div>
+                    <p>Atendimento iniciado com Dra. Renata.</p>
+                    <span class="responsavel">Dra. Renata (Psicóloga)</span>
+                </div>
+            </div>
+            <div class="evento pendente">
+                <div class="circulo cinza"></div>
+                <div class="evento-conteudo">
+                    <strong class="cinza">Resolvido</strong>
+                    <p class="cinza">Aguardando conclusão.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ========== TELA 7 — INFORMAÇÕES / FAQ ========== -->
+<div class="tela" id="tela-info">
+    <div class="cabecalho">
+        <button class="btn-voltar" onclick="ir('tela-home')">← Voltar</button>
+        <h2>Informações</h2>
+    </div>
+    <div class="corpo">
+        <p class="secao-titulo">Perguntas Frequentes</p>
+        <div class="faq">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-pergunta">Como abrir um caso? <span>▾</span></div>
+                <div class="faq-resposta">Acesse <strong>Nova Solicitação</strong>, preencha categoria, prioridade, local e descrição. Você pode enviar anonimamente. Ao final recebe um número de protocolo.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-pergunta">Como consultar meu caso? <span>▾</span></div>
+                <div class="faq-resposta">Acesse <strong>Consultar Caso</strong> e informe o número de protocolo. Você verá status, prazo e histórico de movimentações.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-pergunta">Como buscar ajuda urgente? <span>▾</span></div>
+                <div class="faq-resposta">Ligue para o <strong>CVV: 188</strong> (24h, gratuito) ou <strong>SAMU: 192</strong>. Veja os contatos abaixo.</div>
+            </div>
+        </div>
+
+        <p class="secao-titulo mt">Telefones Úteis</p>
+        <div class="contatos">
+            <button class="contato" onclick="toast('📞 Ligando para CAPS...')">
+                <span class="cont-icone verde">🏥</span>
+                <div><strong>CAPS</strong><small>(44) 3321-0000</small></div>
+                <span>›</span>
+            </button>
+            <button class="contato" onclick="toast('📞 Ligando para UBS...')">
+                <span class="cont-icone azul">🏨</span>
+                <div><strong>UBS</strong><small>(44) 3322-5500</small></div>
+                <span>›</span>
+            </button>
+            <button class="contato emergencia" onclick="toast('📞 Ligando para SAMU...')">
+                <span class="cont-icone vermelho">⚡</span>
+                <div><strong>SAMU — Emergência</strong><small class="vermelho">192</small></div>
+                <span>›</span>
+            </button>
+            <button class="contato" onclick="toast('📞 Ligando para CVV...')">
+                <span class="cont-icone roxo">💜</span>
+                <div><strong>CVV</strong><small>188 · 24h · Gratuito</small></div>
+                <span>›</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ========== TELA 8 — DASHBOARD (GESTOR) ========== -->
+<div class="tela" id="tela-dashboard">
+    <div class="cabecalho">
+        <button class="btn-voltar" onclick="ir('tela-home')">← Voltar</button>
+        <h2>Dashboard</h2>
+    </div>
+    <div class="corpo">
+        <div class="grid-stats">
+            <div class="stat cinza"><span id="stat-abertos">—</span><small>Abertos</small></div>
+            <div class="stat azul"><span id="stat-atend">—</span><small>Em atendimento</small></div>
+            <div class="stat verde"><span id="stat-resolvidos">—</span><small>Resolvidos</small></div>
+            <div class="stat roxo"><span id="stat-urgentes">—</span><small>Urgentes</small></div>
+        </div>
+
+        <div class="filtros">
+            <button class="filtro ativo" data-filtro="TODOS" onclick="filtrar(this)">Todos</button>
+            <button class="filtro" data-filtro="ABERTO" onclick="filtrar(this)">Abertos</button>
+            <button class="filtro" data-filtro="EM_EXECUCAO" onclick="filtrar(this)">Em atendimento</button>
+            <button class="filtro" data-filtro="URGENTE" onclick="filtrar(this)">Urgentes</button>
+        </div>
+
+        <div id="lista-dashboard">
+            <p class="msg-carregando">Carregando...</p>
+        </div>
+    </div>
+
+    <nav class="nav-inferior">
+        <button class="nav-item" onclick="ir('tela-home')">🏠<span>Home</span></button>
+        <button class="nav-item" onclick="ir('tela-nova')">＋<span>Novo</span></button>
+        <button class="nav-item ativo" onclick="ir('tela-dashboard')">📊<span>Dashboard</span></button>
+        <button class="nav-item" onclick="ir('tela-perfil')">👤<span>Perfil</span></button>
+    </nav>
+</div>
+
+
+<!-- ========== TELA 9 — PERFIL ========== -->
+<div class="tela" id="tela-perfil">
+    <div class="cabecalho">
+        <button class="btn-voltar" onclick="ir('tela-home')">← Voltar</button>
+        <h2>Meu Perfil</h2>
+    </div>
+    <div class="corpo">
+        <div class="perfil-hero">
+            <div class="perfil-avatar">M</div>
+            <h3>Maria da Silva</h3>
+            <span class="badge verde">Cidadão</span>
+        </div>
+
+        <div class="card">
+            <div class="linha-detalhe"><span>E-mail</span><strong>maria@exemplo.com</strong></div>
+            <div class="linha-detalhe"><span>Telefone</span><strong>(44) 99999-0000</strong></div>
+            <div class="linha-detalhe"><span>CPF</span><strong>***.***.***-42</strong></div>
+            <div class="linha-detalhe"><span>Tipo</span><strong>Cidadão</strong></div>
+        </div>
+
+        <div class="grid-stats-mini">
+            <div class="stat-mini"><strong>2</strong><small>Abertos</small></div>
+            <div class="stat-mini"><strong>1</strong><small>Em atendimento</small></div>
+            <div class="stat-mini"><strong>5</strong><small>Resolvidos</small></div>
+        </div>
+
+        <button class="btn-secundario" onclick="ir('tela-config')">⚙️ Configurações</button>
+        <button class="btn-perigo" onclick="ir('tela-login'); toast('Você saiu da conta.')">Sair da conta</button>
+    </div>
+
+    <nav class="nav-inferior">
+        <button class="nav-item" onclick="ir('tela-home')">🏠<span>Home</span></button>
+        <button class="nav-item" onclick="ir('tela-nova')">＋<span>Novo</span></button>
+        <button class="nav-item" onclick="ir('tela-dashboard')">📊<span>Dashboard</span></button>
+        <button class="nav-item ativo">👤<span>Perfil</span></button>
+    </nav>
+</div>
+
+
+<!-- ========== TELA 10 — CONFIGURAÇÕES ========== -->
+<div class="tela" id="tela-config">
+    <div class="cabecalho">
+        <button class="btn-voltar" onclick="ir('tela-perfil')">← Voltar</button>
+        <h2>Configurações</h2>
+    </div>
+    <div class="corpo">
+        <p class="secao-titulo">Conta</p>
+        <div class="lista-config">
+            <button class="config-item" onclick="toast('Editar perfil...')">
+                <span>👤 Editar perfil</span><span>›</span>
+            </button>
+            <button class="config-item" onclick="toast('Alterar senha...')">
+                <span>🔒 Alterar senha</span><span>›</span>
+            </button>
+        </div>
+
+        <p class="secao-titulo mt">Notificações</p>
+        <div class="lista-config">
+            <div class="config-item">
+                <span>🔔 Notificações push</span>
+                <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+            </div>
+            <div class="config-item">
+                <span>📧 E-mail de atualizações</span>
+                <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+            </div>
+        </div>
+
+        <p class="secao-titulo mt">Privacidade</p>
+        <div class="lista-config">
+            <div class="config-item">
+                <span>🛡️ Modo anônimo padrão</span>
+                <label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label>
+            </div>
+            <button class="config-item" onclick="toast('Termos de uso...')">
+                <span>📄 Termos de uso</span><span>›</span>
+            </button>
+        </div>
+
+        <p class="secao-titulo mt">Suporte</p>
+        <div class="lista-config">
+            <button class="config-item" onclick="toast('Central de ajuda...')">
+                <span>❓ Central de ajuda</span><span>›</span>
+            </button>
+            <div class="config-item">
+                <span>📱 Versão</span><span class="versao">v1.0.0</span>
+            </div>
+        </div>
+
+        <button class="btn-perigo" onclick="ir('tela-login'); toast('Você saiu da conta.')">Sair da conta</button>
+    </div>
+</div>
+
+
+<!-- ========== MODAL — ATUALIZAR STATUS ========== -->
+<div class="modal-fundo hidden" id="modal-status">
+    <div class="modal">
+        <div class="modal-cabecalho">
+            <h3>Atualizar Status</h3>
+            <button onclick="fecharModal()">✕</button>
+        </div>
+        <p class="modal-proto" id="modal-proto-texto">Protocolo #—</p>
+
+        <div class="campo">
+            <label>Novo status</label>
+            <select id="modal-novo-status">
+                <option value="ABERTO">Aberto</option>
+                <option value="TRIAGEM">Em Triagem</option>
+                <option value="EM_EXECUCAO">Em Atendimento</option>
+                <option value="RESOLVIDO">Resolvido</option>
+                <option value="ENCERRADO">Encerrado</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label>Comentário</label>
+            <textarea rows="3" placeholder="Descreva a atualização..."></textarea>
+        </div>
+        <div class="modal-acoes">
+            <button class="btn-secundario" onclick="fecharModal()">Cancelar</button>
+            <button class="btn-primario" onclick="salvarStatus()">Salvar</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- TOAST -->
+<div class="toast hidden" id="toast-msg"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
